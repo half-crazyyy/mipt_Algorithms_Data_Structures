@@ -214,6 +214,15 @@ void test_heap() {
     }
     build_heap(heap);
     std::cout << heap << std::endl;
+    build_heap(heap, std::greater<int>());
+    std::cout << heap << std::endl;
+    std::vector<int> m{ -10, 5, 90, 51, -18, 29, 0, 4, 5, 6, 8};
+    heap_sort(m);
+    std::cout << m << std::endl;
+    heap_sort(m, [](int a, int b) {return a > b; });
+    std::cout << m << std::endl;
+    heap_sort(m, std::greater<int>());
+    std::cout << m << std::endl;
 }
 
 int main(){
