@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\alg.h" />
     <ClInclude Include="..\..\mdeque.h" />
+    <ClInclude Include="..\..\mheap.h" />
     <ClInclude Include="..\..\mvector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

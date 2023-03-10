@@ -3,6 +3,8 @@
 #include<vector>
 #include<string>
 #include "mdeque.h"
+#include "mheap.h"
+
 template <class T>
 inline std::ostream & operator << (std::ostream & o, const std::vector<T> & mvect){
     o << '(';
@@ -201,13 +203,25 @@ void test_mdeque(){
         }
     }
 }
-
+void test_heap() {
+    std::vector<int> heap{ 16, 8, 8, 7, 1, 0, 1, 3, 20};
+    sift_up(heap, heap.size(), heap.size() - 1);
+    std::cout << heap<<std::endl;
+    for (int i = heap.size() - 1; i > 0; --i) {
+        std::swap(heap[0], heap[i]);
+        sift_down(heap, i, 0);
+        std::cout << heap << std::endl;
+    }
+    build_heap(heap);
+    std::cout << heap << std::endl;
+}
 
 int main(){
     //test_factorial();
     //test_linsearch();
     //test_binsearch();
     //test_mvector();
-    test_mdeque();
+    //test_mdeque();
+    test_heap();
     return 0;
 }
