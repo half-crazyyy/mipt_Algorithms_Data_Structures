@@ -320,14 +320,73 @@ void test_heap() {
         std::cout << m << std::endl;
     }
 }
+void test_priorety_queue() {
+    mpriority_queue <std::pair<int, int>> q;
+    q.push({ 1,2 });
+    q.push({ 3,4 });
+    q.push({ 12,18 });
+    std::cout << q.top().first << " " << q.top().second << std::endl;
+    q.push({ 13,12 });
+    std::cout << q.top().first << " " << q.top().second << std::endl;
+    q.pop();
+    std::cout << q.top().first << " " << q.top().second << std::endl;
+    mpriority_queue <int> iq;
+    iq.push(-10);
+    iq.push(-10);
+    iq.push(15);
+    iq.push(10);
+    iq.push(-8);
+   
+    std::cout << iq.top() << std::endl;
+
+    mpriority_queue <int, std::greater<int>> ql;
+    ql.push(-10);
+    ql.push(-10);
+    ql.push(15);
+    ql .push(10);
+    ql.push(-8);
+
+    std::cout << ql.top() << std::endl;
+
+    mpriority_queue <int, std::function<bool(int, int)>> qf([](int a, int b) {return abs(a) > abs(b); });
+    qf.push(-10);
+    qf.push(-10);
+    qf.push(15);
+    qf.push(10);
+    qf.push(-8);
+
+    std::cout << qf.top() << std::endl;
+
+    struct A {
+        int key = 0;
+        char data[4096] = { 0 };
+    }; 
+    std::vector <A> qa = { {10, "abc"},{20, "def"}, {0, "ghi"}, {8, "l"}, {15, "x"}};
+    mpriority_queue <int, std::function<bool(int, int)>> q_index([&qa](int a, int b) {return qa[a].data[0] < qa[b].data[0]; });
+    q_index.push(1);
+    q_index.push(4);
+    q_index.push(2);
+    q_index.push(0);
+    std::cout << qa[q_index.top()].data << std::endl;
+    /*for (int i = 'a'; i <= 'z'; ++i) {
+        std::cout << i << " " << char(i) << std::endl;
+    }*/
+    std::cout << sizeof(A) << std::endl;
+    q_index.pop();
+
+    std::cout << qa[q_index.top()].data << std::endl;
+    q_index.push(3);
+    std::cout << qa[q_index.top()].data << std::endl;
+}
 
 int main(){
-    std::vector<int>::value_type x;
+    //std::vector<int>::value_type x;
     //test_factorial();
     //test_linsearch();
     //test_binsearch();
     //test_mvector();
     //test_mdeque();
-    test_heap();
+    //test_heap();
+    test_priorety_queue();
     return 0;
 }

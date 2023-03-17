@@ -86,7 +86,34 @@ inline void heap_sort(Container& v,  Comparator cmp = Comparator()) {
 	}
 }
 
+template<class T, class Comparator = std::less<T>>
+class mpriority_queue 
+{
+public:
+	mpriority_queue() = default;
+	mpriority_queue(Comparator cmp) : m_cmp(cmp) {
+		
+	}
 
+	void push(const T& value) {
+		m_container.push_back(value);
+		sift_up(m_container, m_container.size(),m_container.size()-1, m_cmp);
+	}
+	const T& top() const{
+		return m_container[0];
+	}
+	void pop() {
+		m_container[0] = m_container[m_container.size() - 1];
+		m_container.pop_back();
+		sift_down(m_container, m_container.size(), 0, m_cmp);
+	}
+	bool empty() const{
+		return m_container.size() == 0;
+	}
+private:
+	mvector<T> m_container;
+	Comparator m_cmp;
+};
 
 
 #endif
