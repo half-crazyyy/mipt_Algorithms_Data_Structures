@@ -5,6 +5,7 @@
 #include "mdeque.h"
 #include "mheap.h"
 
+
 template <class T>
 inline std::ostream & operator << (std::ostream & o, const std::vector<T> & mvect){
     o << '(';
@@ -203,29 +204,125 @@ void test_mdeque(){
         }
     }
 }
-void test_heap() {
+void test_heapi() {
     std::vector<int> heap{ 16, 8, 8, 7, 1, 0, 1, 3, 20};
-    sift_up(heap, heap.size(), heap.size() - 1);
+    sift_upi(heap, heap.size(), heap.size() - 1);
     std::cout << heap<<std::endl;
     for (int i = heap.size() - 1; i > 0; --i) {
         std::swap(heap[0], heap[i]);
-        sift_down(heap, i, 0);
+        sift_downi(heap, i, 0);
         std::cout << heap << std::endl;
     }
-    build_heap(heap);
+    build_heapi(heap);
     std::cout << heap << std::endl;
-    build_heap(heap, std::greater<int>());
+    build_heapi(heap, std::greater<int>());
     std::cout << heap << std::endl;
     std::vector<int> m{ -10, 5, 90, 51, -18, 29, 0, 4, 5, 6, 8};
-    heap_sort(m);
+    heap_sorti(m);
     std::cout << m << std::endl;
-    heap_sort(m, [](int a, int b) {return a > b; });
+    heap_sorti(m, [](int a, int b) {return a > b; });
     std::cout << m << std::endl;
-    heap_sort(m, std::greater<int>());
+    heap_sorti(m, std::greater<int>());
     std::cout << m << std::endl;
+}
+void test_heap() {
+    {
+        std::vector<int> heap{ 16, 8, 8, 7, 1, 0, 1, 3, 20 };
+        sift_up(heap, heap.size(), heap.size() - 1);
+        std::cout << heap << std::endl;
+        for (int i = heap.size() - 1; i > 0; --i) {
+            std::swap(heap[0], heap[i]);
+            sift_down(heap, i, 0);
+            std::cout << heap << std::endl;
+        }
+        build_heap(heap);
+        std::cout << heap << std::endl;
+        build_heap(heap, std::greater<int>());
+        std::cout << heap << std::endl;
+        std::vector<int> m{ -10, 5, 90, 51, -18, 29, 0, 4, 5, 6, 8 };
+        heap_sort(m);
+        std::cout << m << std::endl;
+        heap_sort(m, [](int a, int b) {return a > b; });
+        std::cout << m << std::endl;
+        heap_sort(m, std::greater<int>());
+        std::cout << m << std::endl;
+    }
+
+    std::cout << std::endl;
+
+    {
+        std::vector<double> heap{ 16.5, 8.3, 8.0, 7.0, 1.0, 0.0, 1.0, 3.0, 20.0 };
+        sift_up(heap, heap.size(), heap.size() - 1);
+        std::cout << heap << std::endl;
+        for (int i = heap.size() - 1; i > 0; --i) {
+            std::swap(heap[0], heap[i]);
+            sift_down(heap, i, 0);
+            std::cout << heap << std::endl;
+        }
+        build_heap(heap);
+        std::cout << heap << std::endl;
+        build_heap(heap, std::greater<double>());
+        std::cout << heap << std::endl;
+        std::vector<double> m{ -10, 5, 90, 51, -18, 29, 0, 4, 5, 6, 8 };
+        heap_sort(m);
+        std::cout << m << std::endl;
+        heap_sort(m, [](double a, double b) {return a > b; });
+        std::cout << m << std::endl;
+        heap_sort(m, std::greater<double>());
+        std::cout << m << std::endl;
+    }
+
+    std::cout << std::endl;
+
+    {
+        mdeque<double> heap{ 16.5, 8.3, 8.0, 7.0, 1.0, 0.0, 1.0, 3.0, 20.0 };
+        sift_up(heap, heap.size(), heap.size() - 1);
+        std::cout << heap << std::endl;
+        for (int i = heap.size() - 1; i > 0; --i) {
+            std::swap(heap[0], heap[i]);
+            sift_down(heap, i, 0);
+            std::cout << heap << std::endl;
+        }
+        build_heap(heap);
+        std::cout << heap << std::endl;
+        build_heap(heap, std::greater<double>());
+        std::cout << heap << std::endl;
+        mdeque<double> m{ -10, 5, 90, 51, -18, 29, 0, 4, 5, 6, 8 };
+        heap_sort(m);
+        std::cout << m << std::endl;
+        heap_sort(m, [](double a, double b) {return a > b; });
+        std::cout << m << std::endl;
+        heap_sort(m, std::greater<double>());
+        std::cout << m << std::endl;
+    }
+
+    std::cout << std::endl;
+
+    {
+        mvector<int> heap{ 16, 8, 8, 7, 1, 0, 1, 3, 20 };
+        sift_up(heap, heap.size(), heap.size() - 1);
+        std::cout << heap << std::endl;
+        for (int i = heap.size() - 1; i > 0; --i) {
+            std::swap(heap[0], heap[i]);
+            sift_down(heap, i, 0);
+            std::cout << heap << std::endl;
+        }
+        build_heap(heap);
+        std::cout << heap << std::endl;
+        build_heap(heap, std::greater<int>());
+        std::cout << heap << std::endl;
+        mvector<int> m{ -10, 5, 90, 51, -18, 29, 0, 4, 5, 6, 8 };
+        heap_sort(m);
+        std::cout << m << std::endl;
+        heap_sort(m, [](int a, int b) {return a > b; });
+        std::cout << m << std::endl;
+        heap_sort(m, std::greater<int>());
+        std::cout << m << std::endl;
+    }
 }
 
 int main(){
+    std::vector<int>::value_type x;
     //test_factorial();
     //test_linsearch();
     //test_binsearch();
