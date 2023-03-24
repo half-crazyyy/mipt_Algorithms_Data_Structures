@@ -6,6 +6,7 @@
 template <class T>
 class mvector{
     public:
+        using value_type = T;
         mvector(){}
         mvector(const mvector & mvect){
             for (const T & val : mvect)
@@ -107,7 +108,7 @@ class mvector{
         const T * end() const {
             return m_mem + m_size;
         }
-    
+        
     private:
         T * m_mem = nullptr;
         int m_size = 0;

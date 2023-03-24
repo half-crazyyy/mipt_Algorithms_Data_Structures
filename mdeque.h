@@ -5,6 +5,7 @@
 template <class T>
 class mdeque{
 public:
+    using value_type = T;
     class iterator{
     public:
         T & operator * (){
