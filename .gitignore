@@ -2,3 +2,5 @@ tst.qbs.user*
 Project1/x64*
 Project1/Project1/x64*
 Project1/.vs*
+cmake-build-*
+.idea

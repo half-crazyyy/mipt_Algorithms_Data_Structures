@@ -4,6 +4,7 @@
 #include<string>
 #include "mdeque.h"
 #include "mheap.h"
+#include "merge_sort.h"
 
 
 template <class T>
@@ -379,6 +380,33 @@ void test_priorety_queue() {
     std::cout << qa[q_index.top()].data << std::endl;
 }
 
+
+void test_merge_sort(){
+    std::vector<int> buffer(1024);
+    std::vector<int> vect {13, 3, 8, 1, 15, 2, 3, 7, 4, 1, 2};
+    merge_sorti(vect, 0, vect.size(), buffer);
+    std::cout << vect << '\n';
+
+    std::vector<int> vect2 {5, 4, 8, 1};
+    merge_sorti(vect2, 0, vect2.size(), buffer);
+    std::cout << vect2 << '\n';
+
+    std::vector<std::string> stvec = {"assa", "ds", "sds", "s s "};
+    merge_sort(stvec);
+    std::cout << stvec << '\n';
+
+    // Выводим код символа пробела и 'd'
+    std::cout << int(' ') << ' ' << int('d') << '\n';
+
+    std::vector<int> vect3 {13, 3, 8, 1, 15, 2, 3, 7, 4, 1, 2};
+    merge_sort_up_i(vect3, buffer);
+    std::cout << vect3 << '\n';
+
+
+}
+
+
+
 int main(){
     //std::vector<int>::value_type x;
     //test_factorial();
@@ -387,6 +415,7 @@ int main(){
     //test_mvector();
     //test_mdeque();
     //test_heap();
-    test_priorety_queue();
+    //test_priorety_queue();
+    test_merge_sort();
     return 0;
 }
