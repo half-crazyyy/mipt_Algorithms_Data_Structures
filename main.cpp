@@ -5,6 +5,7 @@
 #include "mdeque.h"
 #include "mheap.h"
 #include "merge_sort.h"
+#include "quick_sort.h"
 
 
 template <class T>
@@ -362,7 +363,7 @@ void test_priorety_queue() {
         int key = 0;
         char data[4096] = { 0 };
     }; 
-    std::vector <A> qa = { {10, "abc"},{20, "def"}, {0, "ghi"}, {8, "l"}, {15, "x"}};
+    std::vector <A> qa = { A {10, "abc"},A {20, "def"}, A {0, "ghi"}, A {8, "l"}, A {15, "x"} };
     mpriority_queue <int, std::function<bool(int, int)>> q_index([&qa](int a, int b) {return qa[a].data[0] < qa[b].data[0]; });
     q_index.push(1);
     q_index.push(4);
@@ -405,6 +406,14 @@ void test_merge_sort(){
 
 }
 
+void test_quick_sort(){
+    std::vector<int> vect3 {13, 3, 8, 1, 15, 2, 3, 7, 4, 1, 2};
+    std::cout<<partition(vect3, 0, vect3.size()-1, 1)<<std::endl;
+    std::cout<<vect3<<std::endl;
+    std::vector<int> vect4 {13, 3, 8, 1, 15, 2, 3, 7, 4, 1, 2};
+    std::cout<<partition(vect4, 0, vect4.size()-1, 0)<<std::endl;
+    std::cout<<vect4<<std::endl;
+}
 
 
 int main(){
@@ -416,6 +425,7 @@ int main(){
     //test_mdeque();
     //test_heap();
     //test_priorety_queue();
-    test_merge_sort();
+    //test_merge_sort();
+    test_quick_sort();
     return 0;
 }
