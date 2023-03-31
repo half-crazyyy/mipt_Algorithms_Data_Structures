@@ -2,6 +2,7 @@
 #include<iostream>
 #include<vector>
 #include<string>
+#include<algorithm>
 #include "mdeque.h"
 #include "mheap.h"
 #include "merge_sort.h"
@@ -413,6 +414,26 @@ void test_quick_sort(){
     std::vector<int> vect4 {13, 3, 8, 1, 15, 2, 3, 7, 4, 1, 2};
     std::cout<<partition(vect4, 0, vect4.size()-1, 0)<<std::endl;
     std::cout<<vect4<<std::endl;
+    std::vector<int> vect5 {8, -7, 5, 1, 2, 3, 4, -1, 4};
+    std::cout<<partition(vect5, 0, vect5.size()-1, 6)<<std::endl;
+    std::cout<<vect5<<std::endl;
+    //merge_sort(vect5);
+    quick_sort(vect5, 0, vect5.size()-1, pivot_central);
+    std::cout<<vect5<<std::endl;
+    std::vector<int> vect6 {-3, 1, 8, 4, 2, 5, -7};
+    std::cout<<vect6<<std::endl;
+    std::cout<<k_stat(vect6, 0, [](std::vector<int> &v, int first, int last){
+        std::cout<<"    "<<v<<" "<<first<<" "<<last<<std::endl;
+        return last;})<<std::endl;
+    std::sort(vect6.begin(), vect6.end());
+    std::cout<<vect6<<std::endl;
+    std::cout<<k_stat(vect6, 0, [](std::vector<int> &v, int first, int last){
+        std::cout<<"    "<<v<<" "<<first<<" "<<last<<std::endl;
+        return last;})<<std::endl;
+    std::cout<<vect6<<std::endl;
+    std::cout<<k_stat(vect6, 0, [](std::vector<int> &v, int first, int last){
+        std::cout<<"    "<<v<<" "<<first<<" "<<last<<std::endl;
+        return (last+first)/2;})<<std::endl;
 }
 
 
