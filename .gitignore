@@ -4,3 +4,7 @@ Project1/Project1/x64*
 Project1/.vs*
 cmake-build-*
 .idea
+.vs
+out
+Project2/Project2/Debug
+Project2/Debug
