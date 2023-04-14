@@ -8,6 +8,7 @@
 #include "merge_sort.h"
 #include "quick_sort.h"
 #include "counting_sort.h"
+#include "trees.h"
 
 template <class T>
 inline std::ostream & operator << (std::ostream & o, const std::vector<T> & mvect){
@@ -466,6 +467,29 @@ void test_counting_sort() {
     std::cout << a9 << std::endl;
 }
 
+void test_bin_search_tree()
+{
+    bin_search_tree t;
+    t.insert(50);
+    t.insert(52);
+    t.insert(9);
+    std::cout << t.contains(11) << std::endl;
+    std::cout << t.contains(9) << std::endl;
+    std::cout << t.contains(52) << std::endl;
+    bin_search_tree t2;
+    t2.insert(50);
+    t2.remove(50);
+    t2.insert(50);
+    t2.insert(52);
+    t2.insert(9);
+    t2.insert(-1);
+    t2.insert(15);
+    t2.insert(16);
+    t2.insert(10);
+    t2.insert(11);
+    t2.remove(9);
+}
+
 int main(){
     //std::vector<int>::value_type x;
     //test_factorial();
@@ -477,6 +501,7 @@ int main(){
     //test_priorety_queue();
     //test_merge_sort();
     ///test_quick_sort();
-    test_counting_sort();
+    //test_counting_sort();
+    test_bin_search_tree();
     return 0;
 }
