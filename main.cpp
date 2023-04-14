@@ -2,9 +2,12 @@
 #include<iostream>
 #include<vector>
 #include<string>
+#include<algorithm>
 #include "mdeque.h"
 #include "mheap.h"
-
+#include "merge_sort.h"
+#include "quick_sort.h"
+#include "counting_sort.h"
 
 template <class T>
 inline std::ostream & operator << (std::ostream & o, const std::vector<T> & mvect){
@@ -361,7 +364,7 @@ void test_priorety_queue() {
         int key = 0;
         char data[4096] = { 0 };
     }; 
-    std::vector <A> qa = { {10, "abc"},{20, "def"}, {0, "ghi"}, {8, "l"}, {15, "x"}};
+    std::vector <A> qa = { A {10, "abc"},A {20, "def"}, A {0, "ghi"}, A {8, "l"}, A {15, "x"} };
     mpriority_queue <int, std::function<bool(int, int)>> q_index([&qa](int a, int b) {return qa[a].data[0] < qa[b].data[0]; });
     q_index.push(1);
     q_index.push(4);
@@ -379,6 +382,90 @@ void test_priorety_queue() {
     std::cout << qa[q_index.top()].data << std::endl;
 }
 
+
+void test_merge_sort(){
+    std::vector<int> buffer(1024);
+    std::vector<int> vect {13, 3, 8, 1, 15, 2, 3, 7, 4, 1, 2};
+    merge_sorti(vect, 0, vect.size(), buffer);
+    std::cout << vect << '\n';
+
+    std::vector<int> vect2 {5, 4, 8, 1};
+    merge_sorti(vect2, 0, vect2.size(), buffer);
+    std::cout << vect2 << '\n';
+
+    std::vector<std::string> stvec = {"assa", "ds", "sds", "s s "};
+    merge_sort(stvec);
+    std::cout << stvec << '\n';
+
+    // Выводим код символа пробела и 'd'
+    std::cout << int(' ') << ' ' << int('d') << '\n';
+
+    std::vector<int> vect3 {13, 3, 8, 1, 15, 2, 3, 7, 4, 1, 2};
+    merge_sort_up_i(vect3, buffer);
+    std::cout << vect3 << '\n';
+
+
+}
+
+void test_quick_sort(){
+    std::vector<int> vect3 {13, 3, 8, 1, 15, 2, 3, 7, 4, 1, 2};
+    std::cout<<partition(vect3, 0, vect3.size()-1, 1)<<std::endl;
+    std::cout<<vect3<<std::endl;
+    std::vector<int> vect4 {13, 3, 8, 1, 15, 2, 3, 7, 4, 1, 2};
+    std::cout<<partition(vect4, 0, vect4.size()-1, 0)<<std::endl;
+    std::cout<<vect4<<std::endl;
+    std::vector<int> vect5 {8, -7, 5, 1, 2, 3, 4, -1, 4};
+    std::cout<<partition(vect5, 0, vect5.size()-1, 6)<<std::endl;
+    std::cout<<vect5<<std::endl;
+    //merge_sort(vect5);
+    quick_sort(vect5, 0, vect5.size()-1, pivot_central);
+    std::cout<<vect5<<std::endl;
+    std::vector<int> vect6 {-3, 1, 8, 4, 2, 5, -7};
+    std::cout<<vect6<<std::endl;
+    std::cout<<k_stat(vect6, 0, [](std::vector<int> &v, int first, int last){
+        std::cout<<"    "<<v<<" "<<first<<" "<<last<<std::endl;
+        return last;})<<std::endl;
+    std::sort(vect6.begin(), vect6.end());
+    std::cout<<vect6<<std::endl;
+    std::cout<<k_stat(vect6, 0, [](std::vector<int> &v, int first, int last){
+        std::cout<<"    "<<v<<" "<<first<<" "<<last<<std::endl;
+        return last;})<<std::endl;
+    std::cout<<vect6<<std::endl;
+    std::cout<<k_stat(vect6, 0, [](std::vector<int> &v, int first, int last){
+        std::cout<<"    "<<v<<" "<<first<<" "<<last<<std::endl;
+        return (last+first)/2;})<<std::endl;
+}
+
+void test_counting_sort() {
+    std::vector<int> a{ 0, 1, 0, 4, 8, 7, 9, 5, 3, 2, 1, 1, 1, 3 };
+    counting_sort<10>(a);
+    std::cout << a << std::endl;
+    std::vector<int> a2{ 0, 2, 0, 1, 2, 0, 1 };
+    counting_sort<3>(a2);
+    std::cout << a2 << std::endl;
+    std::vector<int> a3{ 0, 1, 0, 4, 8, 7, 9, 5, 3, 2, 1, 1, 1, 3 };
+    pocket_sort<10>(a3);
+    std::cout << a3 << std::endl;
+    std::vector<int> a4{ 0, 2, 0, 1, 2, 0, 1 };
+    pocket_sort<3>(a4);
+    std::cout << a4 << std::endl;
+    std::vector<unsigned long long> a5{ 0, 1, 0, 4, 8, 7, 9,76745466865, 5, 3, 2, 1, 1, 1, 3, 89977768 };
+    LSD(a5);
+    std::cout << a5 << std::endl;
+    std::vector<unsigned long long> a6{ 8686578, 0, 2, 0, 1, 2, 0, 1, 4556576008 };
+    LSD(a6);
+    std::cout << a6 << std::endl;
+    std::vector<unsigned long long> a7{ 0, 1, 0, 4, 8, 7, 9,76745466865, 5, 3, 2, 1, 1, 1, 3, 89977768 };
+    MSD(a7);
+    std::cout << a7 << std::endl;
+    std::vector<unsigned long long> a8{ 8686578, 0, 2, 0, 1, 2, 0, 1, 4556576008 };
+    MSD(a8);
+    std::cout << a8 << std::endl;
+    std::vector<unsigned short> a9{0x1F0A, 0x0F03, 0x0A02, 0x0A01, 0x1F01  };
+    MSD(a9);
+    std::cout << a9 << std::endl;
+}
+
 int main(){
     //std::vector<int>::value_type x;
     //test_factorial();
@@ -387,6 +474,9 @@ int main(){
     //test_mvector();
     //test_mdeque();
     //test_heap();
-    test_priorety_queue();
+    //test_priorety_queue();
+    //test_merge_sort();
+    ///test_quick_sort();
+    test_counting_sort();
     return 0;
 }
