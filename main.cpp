@@ -490,6 +490,27 @@ void test_bin_search_tree()
     t2.remove(9);
 }
 
+void test_avl_search_tree()
+{
+    avl_search_tree t;
+    bin_search_tree bt;
+    for (int i=0; i<10; i++){
+        t.insert(i);
+        bt.insert(i);
+    }
+    t.remove(7);
+    t.remove(8);
+    avl_search_tree_test_balance t1;
+    t1.insert(50);
+    t1.insert(40);
+    t1.insert(60);
+    t1.insert(30);
+    t1.insert(40);
+    t1.insert(41);
+    t1.insert(46);
+    t1.balance_root();
+}
+
 int main(){
     //std::vector<int>::value_type x;
     //test_factorial();
@@ -500,8 +521,9 @@ int main(){
     //test_heap();
     //test_priorety_queue();
     //test_merge_sort();
-    ///test_quick_sort();
+    //test_quick_sort();
     //test_counting_sort();
-    test_bin_search_tree();
+    //test_bin_search_tree();
+    test_avl_search_tree();
     return 0;
 }
