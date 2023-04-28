@@ -533,8 +533,12 @@ void test_mmap(){
     mm[8] = 10;
     mm[7] = 2;
     std::cout<< mm<<std::endl;
+    for (auto it : mm){
+        std::cout<<it.first<<' '<<it.second<<std::endl;
+    }
     mm = {{1,2}, {3,4}};
     std::cout<<mm<<std::endl;
+
 }
 
 int main(){
