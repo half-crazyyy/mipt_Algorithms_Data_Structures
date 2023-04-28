@@ -526,7 +526,7 @@ void test_avl_search_tree()
 }
 
 void test_mmap(){
-    mmap mm;
+    mmap <int, int> mm;
     mm[10] = 2;
     mm[9] = 4;
     mm[9] = 5;
@@ -538,6 +538,14 @@ void test_mmap(){
     }
     mm = {{1,2}, {3,4}};
     std::cout<<mm<<std::endl;
+    mmap <std::string, mvector <int>> m1;
+    m1["abc"] = {1, 2, 3};
+    m1["das"] = {4, 6, 7};
+    m1["pab"] = {9, 9 ,9};
+    std::cout<<m1<<std::endl;
+    std::cout<<m1["das"]<<std::endl;
+    m1["das"][0] = 11111;
+    std::cout<<m1<<std::endl;
 
 }
 

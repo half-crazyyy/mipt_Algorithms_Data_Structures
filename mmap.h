@@ -4,13 +4,14 @@
 #include <stdexcept>
 #include <iostream>
 
+template <class Key, class Value>
 class mmap
 {
 private:
     struct node
     {
-        int key = 0;
-        int data = 0;
+        Key key = 0;
+        Value data = 0;
         int height = 1;
         node * left = nullptr;
         node * right = nullptr;
@@ -38,7 +39,7 @@ private:
 
     };
     node * m_root = nullptr;
-    bool contains(int key, node *n)
+    bool contains(const Key & key, node *n)
     {
         if (n == nullptr)
             return false;
@@ -49,7 +50,7 @@ private:
         return true;
     }
 
-    void insert(int key, int data, node *&n)
+    void insert(const Key & key, const Value & data, node *&n)
     {
         if (n == nullptr)
             n = new node {key, data};
@@ -61,7 +62,7 @@ private:
         balance(n);
     }
 
-    void remove_right_minimum(node *& n, int & key, int & data)
+    void remove_right_minimum(node *& n, Key & key, Value & data)
     {
         if (n->left == nullptr)
         {
@@ -76,7 +77,7 @@ private:
         balance(n);
     }
 
-    void remove(int key, node *&n)
+    void remove(const Key & key, node *&n)
     {
         if (n == nullptr)
             return;
@@ -139,9 +140,9 @@ private:
         }
     }
 
-    void find_or_insect(node *&n,node *& r1, int key){
+    void find_or_insect(node *&n,node *& r1, const Key & key){
         if (n == nullptr)
-            r1 =  (n = new node {key, 0});
+            r1 =  (n = new node {key});
         else if (key < n->key)
             find_or_insect(n->left,r1, key);
         else if (key > n->key)
@@ -151,13 +152,13 @@ private:
         balance(n);
     }
 
-    static void print(node *n, std::ostream & o){
-        if (n==nullptr)
-            return;
-        print(n->left, o);
-        o<<'{'<<n->key<<','<<n->data<<'}'<<',';
-        print(n->right , o);
-    }
+//    static void print(node *n, std::ostream & o){
+//        if (n==nullptr)
+//            return;
+//        print(n->left, o);
+//        o<<'{'<<n->key<<','<<n->data<<'}'<<',';
+//        print(n->right , o);
+//    }
 
     void clear(node *n){
         if (n==nullptr)
@@ -172,10 +173,10 @@ public:
     class iterator{
     public:
         friend class mmap;
-        std::pair <int, int &> operator * (){
+        std::pair <const Key &, Value &> operator * (){
             return {n->key, n->data};
         }
-        const std::pair <int, int &> operator * () const{
+        const std::pair <const Key &, const Value &> operator * () const{
             return {n->key, n->data};
         }
         iterator & operator ++ (){
@@ -217,7 +218,7 @@ public:
 
 
     mmap() = default;
-    mmap(std::initializer_list <std::pair <int, int>> list){
+    mmap(std::initializer_list <std::pair <Key, Value>> list){
         for (auto value: list)
             insert(value.first, value.second);
     }
@@ -231,22 +232,22 @@ public:
         clear();
     }
 
-    bool contains(int key)
+    bool contains(const Key & key)
     {
        return contains(key, m_root);
     }
-    void insert(int key, int data)
+    void insert(const Key & key, const Value & data)
     {
         insert(key, data, m_root);
         m_root->parent = nullptr;
     }
-    void remove(int key)
+    void remove(const Key & key)
     {
         remove(key, m_root);
         m_root->parent = nullptr;
     }
 
-    int & operator[](int key){
+    Value & operator[](const Key & key){
         node * r1 = nullptr;
         find_or_insect(m_root, r1, key);
         m_root->parent = nullptr;
@@ -261,7 +262,7 @@ public:
         return o;
     }
 
-    mmap & operator=(std::initializer_list <std::pair <int, int>> list){
+    mmap & operator=(std::initializer_list <std::pair <Key, Value>> list){
         clear();
         for (auto value: list)
             insert(value.first, value.second);
