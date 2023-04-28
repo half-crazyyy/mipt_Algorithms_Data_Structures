@@ -2,6 +2,7 @@
 #ifndef Trees_H
 #define Trees_H
 #include <vector>
+#include <iostream>
 
 class bin_search_tree
 {
@@ -310,7 +311,13 @@ private:
         }
     }
 
-
+    void print(node *n){
+        if (n==nullptr)
+            return;
+        print(n->left);
+        std::cout<<n->key<<' ';
+        print(n->right);
+    }
 
 public:
 
@@ -320,6 +327,11 @@ public:
     }
     void balance_root(){
         balance(m_root);
+    }
+
+    void print(){
+        print(m_root);
+
     }
 };
 

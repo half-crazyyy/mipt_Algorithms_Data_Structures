@@ -9,6 +9,9 @@
 #include "quick_sort.h"
 #include "counting_sort.h"
 #include "trees.h"
+#include "mmap.h"
+#include <map>
+#include <set>
 
 template <class T>
 inline std::ostream & operator << (std::ostream & o, const std::vector<T> & mvect){
@@ -509,6 +512,29 @@ void test_avl_search_tree()
     t1.insert(41);
     t1.insert(46);
     t1.balance_root();
+    t1.print();
+    std::set <int> m_set;
+    m_set.insert(2);
+    m_set.insert(4);
+    m_set.insert(2);
+    m_set.insert(5);
+    m_set.insert(-2);
+    m_set.insert(6);
+    std::cout<<std::endl;
+    for (int v: m_set)
+        std::cout<<v<<std::endl;
+}
+
+void test_mmap(){
+    mmap mm;
+    mm[10] = 2;
+    mm[9] = 4;
+    mm[9] = 5;
+    mm[8] = 10;
+    mm[7] = 2;
+    std::cout<< mm<<std::endl;
+    mm = {{1,2}, {3,4}};
+    std::cout<<mm<<std::endl;
 }
 
 int main(){
@@ -524,6 +550,7 @@ int main(){
     //test_quick_sort();
     //test_counting_sort();
     //test_bin_search_tree();
-    test_avl_search_tree();
+    //test_avl_search_tree();
+    test_mmap();
     return 0;
 }
