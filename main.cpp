@@ -549,6 +549,20 @@ void test_mmap(){
 
 }
 
+void test_decart_tree() {
+    decart_tree t1;
+    t1.insert(50, 100);
+    t1.insert(30, 80);
+    t1.insert(70, 20);
+    t1.insert(20, 10);
+    t1.insert(40, 15);
+    t1.insert(60, 10);
+    t1.insert(31, 11);
+    t1.insert(45, 10);
+    t1.insert(35, 21);
+    t1.remove(30);
+}
+
 int main(){
     //std::vector<int>::value_type x;
     //test_factorial();
@@ -563,6 +577,7 @@ int main(){
     //test_counting_sort();
     //test_bin_search_tree();
     //test_avl_search_tree();
-    test_mmap();
+    //test_mmap();
+    test_decart_tree();
     return 0;
 }
