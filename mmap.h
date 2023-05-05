@@ -266,12 +266,14 @@ public:
         clear();
         for (auto value: list)
             insert(value.first, value.second);
+        return *this;
     }
 
     mmap & operator=(const mmap & m){
         clear();
         for (auto value: m)
             insert(value.first, value.second);
+        return *this;
     }
 
     bool empty(){
