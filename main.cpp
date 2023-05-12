@@ -12,6 +12,9 @@
 #include "mmap.h"
 #include <map>
 #include <set>
+#include <unordered_map>
+#include <unordered_set>
+#include "mhash.h"
 
 template <class T>
 inline std::ostream & operator << (std::ostream & o, const std::vector<T> & mvect){
@@ -470,6 +473,8 @@ void test_counting_sort() {
     std::cout << a9 << std::endl;
 }
 
+
+
 void test_bin_search_tree()
 {
     bin_search_tree t;
@@ -562,6 +567,51 @@ void test_decart_tree() {
     t1.insert(35, 21);
     t1.remove(30);
 }
+struct Point{
+    int x, y;
+    bool operator == (Point other) const{
+        return x == other.x && y == other.y ;
+    }
+};
+
+namespace std{
+    template<>						
+    struct hash<Point>  
+    {                                                   
+        size_t                                            
+        operator()(Point val) const noexcept              
+        { 
+            return static_cast<size_t>((val.x << 7) ^ val.y); 
+        }            
+    };
+}
+
+void test_hash(){
+    std::hash<int> h1;
+    std::cout << h1(-1)%8 << ' ' << h1(10)%8 << std::endl;
+    std::hash<std::string> h2;
+    std::cout << h2("Hello") << " " << h2("hello") << " " << h2("world") << std::endl;
+    std::hash<Point> h3;
+    std::cout << h3({1,2}) << ' ' << h3({1, -10}) << std::endl;
+    std::unordered_map<Point, int> um1;
+    um1[{1,2}] = 4;
+    std::cout << um1[{1,2}] << std::endl;
+    um1[{2,1}] = -20;
+    std::cout << um1[{2,1}] << std::endl;
+    ++um1[{1,2}];
+    std::cout << um1[{1,2}] << std::endl;
+    mhash<int,int> mh1;
+    mh1[1] = 2;
+    mh1[2] = 3;
+    mh1[10] = 5;
+    std::cout << mh1[10] << std::endl;
+    mhash<std::string, std::string> mh2;
+    mh2["hello"] = "world";
+    mh2["abc"] = "string";
+    std::cout << mh2["abc"] << ' ' << mh2["hello"] << std::endl;
+    mh2.remove("hello");
+    std::cout << mh2["abc"] << ' ' << mh2["hello"] << std::endl;
+}
 
 int main(){
     //std::vector<int>::value_type x;
@@ -578,6 +628,7 @@ int main(){
     //test_bin_search_tree();
     //test_avl_search_tree();
     //test_mmap();
-    test_decart_tree();
+    //test_decart_tree();
+    test_hash();
     return 0;
 }
