@@ -8,6 +8,10 @@
 #include "merge_sort.h"
 #include "quick_sort.h"
 #include "counting_sort.h"
+#include "trees.h"
+#include "mmap.h"
+#include <map>
+#include <set>
 
 template <class T>
 inline std::ostream & operator << (std::ostream & o, const std::vector<T> & mvect){
@@ -466,6 +470,85 @@ void test_counting_sort() {
     std::cout << a9 << std::endl;
 }
 
+void test_bin_search_tree()
+{
+    bin_search_tree t;
+    t.insert(50);
+    t.insert(52);
+    t.insert(9);
+    std::cout << t.contains(11) << std::endl;
+    std::cout << t.contains(9) << std::endl;
+    std::cout << t.contains(52) << std::endl;
+    bin_search_tree t2;
+    t2.insert(50);
+    t2.remove(50);
+    t2.insert(50);
+    t2.insert(52);
+    t2.insert(9);
+    t2.insert(-1);
+    t2.insert(15);
+    t2.insert(16);
+    t2.insert(10);
+    t2.insert(11);
+    t2.remove(9);
+}
+
+void test_avl_search_tree()
+{
+    avl_search_tree t;
+    bin_search_tree bt;
+    for (int i=0; i<10; i++){
+        t.insert(i);
+        bt.insert(i);
+    }
+    t.remove(7);
+    t.remove(8);
+    avl_search_tree_test_balance t1;
+    t1.insert(50);
+    t1.insert(40);
+    t1.insert(60);
+    t1.insert(30);
+    t1.insert(40);
+    t1.insert(41);
+    t1.insert(46);
+    t1.balance_root();
+    t1.print();
+    std::set <int> m_set;
+    m_set.insert(2);
+    m_set.insert(4);
+    m_set.insert(2);
+    m_set.insert(5);
+    m_set.insert(-2);
+    m_set.insert(6);
+    std::cout<<std::endl;
+    for (int v: m_set)
+        std::cout<<v<<std::endl;
+}
+
+void test_mmap(){
+    mmap <int, int> mm;
+    mm[10] = 2;
+    mm[9] = 4;
+    mm[9] = 5;
+    mm[8] = 10;
+    mm[7] = 2;
+    std::cout<< mm<<std::endl;
+    for (auto it : mm){
+        std::cout<<it.first<<' '<<it.second<<std::endl;
+    }
+    mm = {{1,2}, {3,4}};
+    std::cout<<mm<<std::endl;
+    mmap <std::string, mvector <int>> m1;
+    m1["abc"] = {1, 2, 3};
+    m1["das"] = {4, 6, 7};
+    m1["pab"] = {9, 9 ,9};
+    std::cout<<m1<<std::endl;
+    std::cout<<m1["das"]<<std::endl;
+    m1["das"][0] = 11111;
+    std::cout<<m1<<std::endl;
+
+}
+
 int main(){
     //std::vector<int>::value_type x;
     //test_factorial();
@@ -476,7 +559,10 @@ int main(){
     //test_heap();
     //test_priorety_queue();
     //test_merge_sort();
-    ///test_quick_sort();
-    test_counting_sort();
+    //test_quick_sort();
+    //test_counting_sort();
+    //test_bin_search_tree();
+    //test_avl_search_tree();
+    test_mmap();
     return 0;
 }
