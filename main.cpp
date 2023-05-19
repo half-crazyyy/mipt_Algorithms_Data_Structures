@@ -618,6 +618,17 @@ void test_hash(){
     std::cout << mh2["abc"] << ' ' << mh2["hello"] << std::endl;
     mh2.remove("hello");
     std::cout << mh2["abc"] << ' ' << mh2["hello"] << std::endl;
+
+    muset mus;
+    mus.insert("abc");
+    mus.insert("xyz");
+    mus.insert("abc");
+    std::cout<<mus.contains("xyz")<<std::endl;
+    for(auto k : mus)
+        std::cout<<k<<std::endl;
+    mus.remove("abc");
+    for(auto k : mus)
+        std::cout<<k<<std::endl;
 }
 
 int main(){
@@ -626,7 +637,7 @@ int main(){
     //test_linsearch();
     //test_binsearch();
     //test_mvector();
-    test_mdeque();
+    //test_mdeque();
     //test_heap();
     //test_priorety_queue();
     //test_merge_sort();
@@ -636,6 +647,6 @@ int main(){
     //test_avl_search_tree();
     //test_mmap();
     //test_decart_tree();
-    //test_hash();
+    test_hash();
     return 0;
 }
