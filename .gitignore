@@ -5,6 +5,7 @@ Project1/.vs*
 cmake-build-*
 .idea
 .vs
+.vscode
 out
 Project2/Project2/Debug
 Project2/Debug
