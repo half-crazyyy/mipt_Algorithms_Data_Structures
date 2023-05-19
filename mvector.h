@@ -78,7 +78,7 @@ class mvector{
                     cap *= 2;
                 T * mem = new T[cap]();
                 for (int i = 0; i < m_size; ++i)
-                    mem[i] = m_mem[i];
+                    mem[i] = std::move(m_mem[i]);
                 delete[] m_mem;
                 m_mem = mem;
                 m_cap = cap;
