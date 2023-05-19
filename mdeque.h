@@ -41,6 +41,18 @@ public:
         for (int i = 0; i < md.size(); ++i)
             push_back(md[i]);
     }
+    mdeque(mdeque && md){
+        m_size = md.m_size;
+        m_front_index = md.m_front_index;
+        m_back_index = md.m_back_index;
+        m_mem = md.m_mem;
+        m_cap = md.m_cap;
+        md.m_size = 0;
+        md.m_front_index = 0;
+        md.m_back_index = 0;
+        md.m_mem = nullptr;
+        md.m_cap = 0;
+    }
     mdeque(const std::vector<T> & mvect){
         for (const T & val : mvect)
             push_back(val);
@@ -92,19 +104,36 @@ public:
         return *this;
     }
 
+    mdeque & operator = (mdeque && md){
+        clear();
+        m_size = md.m_size;
+        m_front_index = md.m_front_index;
+        m_back_index = md.m_back_index;
+        m_mem = md.m_mem;
+        m_cap = md.m_cap;
+        md.m_size = 0;
+        md.m_front_index = 0;
+        md.m_back_index = 0;
+        md.m_mem = nullptr;
+        md.m_cap = 0;
+        return *this;
+    }
+
     void push_front(const T& val){
+        T v1 = val;
         reserve(m_size + 1);
         m_size ++;
         if (--m_front_index < 0)
             m_front_index = m_cap - 1;
-        m_mem[m_front_index] = val;
+        m_mem[m_front_index] = std::move(v1);
     }
     void push_back(const T& val){
+        T v1 = val;
         reserve(m_size + 1);
         m_size ++;
         if (++m_back_index>= m_cap)
             m_back_index = 0;
-        m_mem[m_back_index] = val;
+        m_mem[m_back_index] = std::move(v1);
     }
     void pop_front(){
         m_mem[m_front_index] = T();
@@ -158,7 +187,7 @@ public:
             m_mem = mem;
             m_cap = cap;
             m_front_index = 0;
-            m_back_index = m_size - 1;
+            m_back_index = std::max(0, m_size - 1);
         }
     }
 

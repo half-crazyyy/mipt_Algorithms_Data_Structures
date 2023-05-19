@@ -213,6 +213,13 @@ void test_mdeque(){
             std::cout << val1 << std::endl;
         }
     }
+
+    mdeque<mdeque<int>> mvect7 = {{1, 2, 3}, {3, 4, 345}, {6}}; 
+    std::cout<<mvect7<<std::endl;
+
+    mdeque<mdeque<int>> mvect8(std::move(mvect7));
+    std::cout<<mvect7<<" "<<mvect8<<std::endl;
+
 }
 void test_heapi() {
     std::vector<int> heap{ 16, 8, 8, 7, 1, 0, 1, 3, 20};
@@ -619,7 +626,7 @@ int main(){
     //test_linsearch();
     //test_binsearch();
     //test_mvector();
-    //test_mdeque();
+    test_mdeque();
     //test_heap();
     //test_priorety_queue();
     //test_merge_sort();
@@ -629,6 +636,6 @@ int main(){
     //test_avl_search_tree();
     //test_mmap();
     //test_decart_tree();
-    test_hash();
+    //test_hash();
     return 0;
 }

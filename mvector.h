@@ -30,8 +30,9 @@ class mvector{
             return m_size;
         }
         void push_back(const T & a){
+            T b = a;
             reserve(m_size+1);
-            m_mem[m_size++] = a;
+            m_mem[m_size++] = std::move(b);
         }
         void pop_back(){
             m_mem[--m_size] = T();
