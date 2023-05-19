@@ -619,7 +619,7 @@ void test_hash(){
     mh2.remove("hello");
     std::cout << mh2["abc"] << ' ' << mh2["hello"] << std::endl;
 
-    muset mus;
+    muset<std::string> mus;
     mus.insert("abc");
     mus.insert("xyz");
     mus.insert("abc");
@@ -629,6 +629,12 @@ void test_hash(){
     mus.remove("abc");
     for(auto k : mus)
         std::cout<<k<<std::endl;
+
+    mumap<std::string, std::string> m;
+    m["abc"] = "xyz";
+    m["xyz"] = "abc";
+    for(auto &k : m)
+        std::cout<<k<<" "<<m[k]<<std::endl;
 }
 
 int main(){
